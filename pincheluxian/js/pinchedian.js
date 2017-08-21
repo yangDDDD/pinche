@@ -11,6 +11,10 @@ function mymap(){
     
     var geoPath = d3.geoPath().projection(projection);
     
+    var pcolor = d3.scalePow().exponent(0.2).domain([1, 34])
+	.range(["darkgray", "gray"])
+	.interpolate(d3.interpolateLab);
+    
     d3.queue()
 		.defer(d3.json, "json/china.geojson")
 		.defer(d3.csv, "csv/pinche_modi.csv", typepinche)
@@ -22,6 +26,7 @@ function mymap(){
 		svg.selectAll("path").data(china.features)
 		.enter().append("path")
 		.attr("d", geoPath).attr("class", "province")
+		.style("fill", function(d){return pcolor(d.properties.id)})
 		
 
 //		pinche.forEach(function(d){d.x = d.load_position_x;d.y = d.load_position_y});	
@@ -53,7 +58,7 @@ function mymap(){
 			});
 		
 		//画button
-		var buttonName = ["出发库分布(B)", "目标库分布(G)","拼车地点分布(Y)","清空"];
+		var buttonName = ["出发库分布(P/B)", "目标库分布(G/G)","拼车地点分布(C/Y)","清空"];
 		d3.select("#controls").selectAll("button.show")
 		.data(buttonName).enter()
 		.append("button")
@@ -242,7 +247,7 @@ function mymap(){
 				return "translate("+ destxy[0] + "," + destxy[1] + ")";
 			})
 			.style("fill","Yellow")
-			console.log(pinArray);
+			//console.log(pinArray);
 			d3.selectAll("td.pinche")
 			.data([pinArray.key])
 			.html(function(p){return p});

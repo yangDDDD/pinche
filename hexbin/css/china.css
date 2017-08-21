@@ -4,30 +4,15 @@ stroke: black;
 opacity: .5;
 fill: gray;
 }
-circle.chufa {
-r: 3;
+circle.cities {
 stroke-width: 1;
-stroke: blue;
-fill: none;
+stroke: black;
+fill: white;
 }
-circle.mubiao {
-r: 3;
-stroke-width: 1;
-stroke: green;
-fill: none;
+circle.centroid {
+fill: red;
+pointer-events: none;
 }
-circle.pin {
-r: 3;
-stroke-width: 1;
-stroke: yellow;
-fill: none;
-}
-
-circle.active {
-	fill: lightblue;
-	r:5
-}
-
 rect.bbox {
 fill: none;
 stroke-dasharray: 5 5;
